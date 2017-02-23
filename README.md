@@ -1,14 +1,13 @@
-# Faceswap App
+# Faceswap Worker
 
-This repository contains two services, the PHP FaceSwap frontend and the
-Python FaceSwap backend. To deploy the application:
+This repository contains the backend service for the FaceSwap app. The frontend
+can be found in https://github.com/bshaffer/faceswap-wordpress.
 
 ```
-$ cd /path/to/faceswap-app
-$ gcloud app deploy
-$ cd worker
-$ gcloud app deploy
+git clone git@github.com:bshaffer/faceswap-worker.git
+cd faceswap-worker
+gcloud app deploy
 ```
 
-This will deploy the `default` and `worker` services. Now go to the home
-of your project to see the app running.
+This will deploy the `worker` services. Now go to the URL of the application
+to see the worker running.

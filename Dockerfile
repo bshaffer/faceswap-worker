@@ -11,4 +11,3 @@ EXPOSE 8080
 ENV PORT 8080
 
 ENTRYPOINT ["gunicorn", "-b", ":8080", "main:app"]
-#ENTRYPOINT ["python", "main.py"]
