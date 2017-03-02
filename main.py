@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import tempfile, os, sys
+import tempfile, os, sys, base64
 
 from flask import Flask, request, current_app
 from google.cloud import storage
@@ -46,6 +46,22 @@ def create_app(debug=False, testing=False, config_overrides=None):
         bucket.blob("output.jpg").upload_from_file(output)
 
         return "Done."
+
+    @app.route("/", methods=['POST'])
+    def post():
+        image1 = request.json.get('image1', None)
+        image2 = request.json.get('image2', None)
+        if not image1 or not image2:
+            return 'Please supply the "image1" and "image2" arguments'
+
+        tmp1 = tempfile.NamedTemporaryFile()
+        tmp2 = tempfile.NamedTemporaryFile()
+        tmp1.write(base64.b64decode(image1))
+        tmp2.write(base64.b64decode(image2))
+        output = tempfile.NamedTemporaryFile(suffix='.jpg')
+
+        os.system('faceswap.py %s %s %s' % (tmp1.name, tmp2.name, output.name))
+        return base64.b64encode(output.read())
     return app
 
 app = create_app()
