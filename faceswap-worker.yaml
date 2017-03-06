@@ -26,7 +26,7 @@ metadata:
 # For more info about Pods see:
 #   https://cloud.google.com/container-engine/docs/pods/
 spec:
-  replicas: 2
+  replicas: 10
   template:
     metadata:
       labels:
@@ -44,4 +44,4 @@ spec:
         # The faceswap worker listens on port 8080 for web traffic by default.
         ports:
         - name: http-server
-          containerPort: 80
+          containerPort: 8080

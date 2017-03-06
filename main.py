@@ -15,10 +15,12 @@
 import tempfile, os, sys, base64
 
 from flask import Flask, request, current_app
+from flask_cors import CORS, cross_origin
 from google.cloud import storage
 
 def create_app(debug=False, testing=False, config_overrides=None):
     app = Flask(__name__)
+    CORS(app)
 
     app.debug = debug
     app.testing = testing
